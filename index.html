@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Assessment & Research Toolkit</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 AI for Assessment & Research Toolkit</h1>
+            <p>Interactive Tool for Designing AI-Powered Assessments & Academic Writing</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('assessment')">📋 AI Assessment</button>
+            <button class="tab-btn" onclick="switchTab('research')">📚 AI Research & Writing</button>
+            <button class="tab-btn" onclick="switchTab('tools')">🛠️ Tool Comparison</button>
+            <button class="tab-btn" onclick="switchTab('prompts')">💡 Prompt Library</button>
+        </div>
+
+        <!-- ASSESSMENT TAB -->
+        <div id="assessment" class="tab-content active">
+            <div class="section">
+                <h2>🎯 AI-Powered Assessment Generator</h2>
+                <p>Create comprehensive assessments, rubrics, and evaluation strategies using AI.</p>
+            </div>
+
+            <div class="section">
+                <h3>Assessment Type Selector</h3>
+                <div class="grid three-col">
+                    <div class="card">
+                        <h4>Multiple Choice Questions</h4>
+                        <p>Generate MCQs with distractors based on common misconceptions</p>
+                        <span class="badge">Fast</span><span class="badge success">Scalable</span>
+                    </div>
+                    <div class="card">
+                        <h4>Essay Rubrics</h4>
+                        <p>Create detailed rubrics for evaluating written assignments</p>
+                        <span class="badge">Detailed</span><span class="badge info">Aligned</span>
+                    </div>
+                    <div class="card">
+                        <h4>Performance Tasks</h4>
+                        <p>Design real-world application assessments with criteria</p>
+                        <span class="badge">Authentic</span><span class="badge">Complex</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Generate Assessment Questions</h3>
+                <form onsubmit="generateQuestions(event)">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label>Topic/Subject</label>
+                            <input type="text" id="topic" placeholder="e.g., Photosynthesis" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Grade/Level</label>
+                            <select id="gradeLevel" required>
+                                <option>Select Grade Level</option>
+                                <option>Grade 5-6</option>
+                                <option>Grade 7-8</option>
+                                <option>Grade 9-10</option>
+                                <option>Grade 11-12</option>
+                                <option>Undergraduate</option>
+                                <option>Graduate</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Number of Questions</label>
+                        <input type="number" id="numQuestions" min="1" max="50" value="5" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Question Type</label>
+                        <select id="questionType" required>
+                            <option>Multiple Choice (MCQ)</option>
+                            <option>Short Answer</option>
+                            <option>Essay</option>
+                            <option>True/False</option>
+                            <option>Mixed</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Instructions</label>
+                        <textarea id="instructions" placeholder="Any specific focus areas or learning objectives?"></textarea>
+                    </div>
+
+                    <button type="submit">Generate Questions</button>
+                </form>
+
+                <div id="questionsOutput" class="output-box" style="display:none;">
+                    <button class="copy-btn secondary" onclick="copyToClipboard('questionsOutput')">Copy</button>
+                    <div id="questionsContent"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Create Assessment Rubric</h3>
+                <form onsubmit="generateRubric(event)">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label>Assessment Name</label>
+                            <input type="text" id="rubricName" placeholder="e.g., Final Project" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Criteria</label>
+                            <input type="number" id="numCriteria" min="2" max="10" value="4" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Rubric Levels</label>
+                        <select id="rubricLevels" required>
+                            <option>4-Point Scale (Excellent, Good, Fair, Poor)</option>
+                            <option>3-Point Scale (Advanced, Proficient, Developing)</option>
+                            <option>5-Point Scale (Exceptional, Proficient, Developing, Beginning, Insufficient)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Assessment Criteria (comma-separated)</label>
+                        <textarea id="criteria" placeholder="e.g., Content Accuracy, Organization, Creativity, Presentation" required></textarea>
+                    </div>
+
+                    <button type="submit">Generate Rubric</button>
+                </form>
+
+                <div id="rubricOutput" class="output-box" style="display:none;">
+                    <button class="copy-btn secondary" onclick="copyToClipboard('rubricOutput')">Copy</button>
+                    <div id="rubricContent"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Assessment Strategy Guide</h3>
+                <ul class="feature-list">
+                    <li><strong>Formative Assessment:</strong> Use to check understanding during learning (quizzes, exit tickets, discussions)</li>
+                    <li><strong>Summative Assessment:</strong> Use to evaluate learning at end of unit (final exams, projects, presentations)</li>
+                    <li><strong>Performance-Based:</strong> Students demonstrate skills in authentic contexts (portfolio, case study, project)</li>
+                    <li><strong>Adaptive Assessment:</strong> AI adjusts difficulty based on student responses</li>
+                    <li><strong>Peer Assessment:</strong> Students evaluate each other with AI-generated rubrics</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- RESEARCH & WRITING TAB -->
+        <div id="research" class="tab-content">
+            <div class="section">
+                <h2>📚 AI for Research & Academic Writing</h2>
+                <p>Streamline your research process and enhance academic writing with AI tools.</p>
+            </div>
+
+            <div class="section">
+                <h3>Research Paper Structure Assistant</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>1. Research Question</h4>
+                        <p>Define clear, focused research questions that guide your inquiry</p>
+                    </div>
+                    <div class="card">
+                        <h4>2. Literature Review</h4>
+                        <p>Summarize existing research and identify research gaps</p>
+                    </div>
+                    <div class="card">
+                        <h4>3. Methodology</h4>
+                        <p>Explain your research approach and data collection methods</p>
+                    </div>
+                    <div class="card">
+                        <h4>4. Findings</h4>
+                        <p>Present results clearly with supporting evidence</p>
+                    </div>
+                    <div class="card">
+                        <h4>5. Discussion</h4>
+                        <p>Interpret findings and connect to existing knowledge</p>
+                    </div>
+                    <div class="card">
+                        <h4>6. Conclusion</h4>
+                        <p>Summarize contributions and suggest future research</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Writing Section Generator</h3>
+                <form onsubmit="generateWritingSection(event)">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label>Paper Section</label>
+                            <select id="paperSection" required>
+                                <option>Select Section</option>
+                                <option>Introduction</option>
+                                <option>Literature Review</option>
+                                <option>Methodology</option>
+                                <option>Results</option>
+                                <option>Discussion</option>
+                                <option>Conclusion</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Writing Style</label>
+                            <select id="writingStyle" required>
+                                <option>Academic (Formal)</option>
+                                <option>Technical</option>
+                                <option>Accessible</option>
+                                <option>Mixed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Topic/Main Points</label>
+                        <textarea id="mainPoints" placeholder="Describe the key points for this section" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Target Word Count</label>
+                        <input type="number" id="wordCount" min="100" max="5000" value="500" required>
+                    </div>
+
+                    <button type="submit">Generate Section</button>
+                </form>
+
+                <div id="writingOutput" class="output-box" style="display:none;">
+                    <button class="copy-btn secondary" onclick="copyToClipboard('writingOutput')">Copy</button>
+                    <div id="writingContent"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Research Writing Checklist</h3>
+                <ul class="feature-list">
+                    <li>✓ Clear thesis statement aligned with research question</li>
+                    <li>✓ Literature review cites 15+ recent sources</li>
+                    <li>✓ Methodology section is reproducible</li>
+                    <li>✓ Findings presented without bias or interpretation</li>
+                    <li>✓ Discussion connects findings to literature</li>
+                    <li>✓ Proper citations (APA/MLA/Chicago) throughout</li>
+                    <li>✓ Grammar and spelling checked</li>
+                    <li>✓ Tables and figures are clear and labeled</li>
+                    <li>✓ Conclusion summarizes main contributions</li>
+                    <li>✓ Potential limitations acknowledged</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>Citation Generator</h3>
+                <form onsubmit="generateCitation(event)">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label>Citation Style</label>
+                            <select id="citationStyle" required>
+                                <option>APA 7th Edition</option>
+                                <option>MLA 9th Edition</option>
+                                <option>Chicago 17th Edition</option>
+                                <option>Harvard</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Source Type</label>
+                            <select id="sourceType" required>
+                                <option>Journal Article</option>
+                                <option>Book</option>
+                                <option>Website</option>
+                                <option>Conference Paper</option>
+                                <option>Dissertation</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Source Details (comma-separated: Author, Title, Year, Publisher)</label>
+                        <textarea id="sourceDetails" placeholder="e.g., Smith, J., Climate Change and Ecosystems, 2023, Academic Press" required></textarea>
+                    </div>
+
+                    <button type="submit">Generate Citation</button>
+                </form>
+
+                <div id="citationOutput" class="output-box" style="display:none;">
+                    <button class="copy-btn secondary" onclick="copyToClipboard('citationOutput')">Copy</button>
+                    <div id="citationContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOOLS COMPARISON TAB -->
+        <div id="tools" class="tab-content">
+            <div class="section">
+                <h2>🛠️ AI Tools Comparison</h2>
+                <p>Compare popular AI tools for assessment and research/writing tasks.</p>
+            </div>
+
+            <div class="section">
+                <h3>Assessment Tools</h3>
+                <table class="tool-comparison">
+                    <tr>
+                        <th>Tool</th>
+                        <th>Best For</th>
+                        <th>Key Features</th>
+                        <th>Cost</th>
+                        <th>Learning Curve</th>
+                    </tr>
+                    <tr>
+                        <td><strong>ChatGPT</strong></td>
+                        <td>Question generation, rubric design, feedback</td>
+                        <td>Fast, versatile, can generate in bulk</td>
+                        <td>Free / $20/mo</td>
+                        <td>Very Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Claude</strong></td>
+                        <td>Detailed rubrics, complex assessments</td>
+                        <td>Nuanced, thoughtful responses, longer context</td>
+                        <td>Free / $20/mo</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Gemini</strong></td>
+                        <td>Multimedia assessment, analysis</td>
+                        <td>Integrated with Google Workspace, image analysis</td>
+                        <td>Free / $20/mo</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gradescope</strong></td>
+                        <td>Automated grading, plagiarism detection</td>
+                        <td>ML-powered grading, analytics</td>
+                        <td>$8-15 per student/year</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Turnitin</strong></td>
+                        <td>Plagiarism detection, originality reports</td>
+                        <td>Industry standard, detailed reports</td>
+                        <td>Institutional pricing</td>
+                        <td>Medium</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3>Research & Writing Tools</h3>
+                <table class="tool-comparison">
+                    <tr>
+                        <th>Tool</th>
+                        <th>Best For</th>
+                        <th>Key Features</th>
+                        <th>Cost</th>
+                        <th>Learning Curve</th>
+                    </tr>
+                    <tr>
+                        <td><strong>ChatGPT</strong></td>
+                        <td>Drafting, brainstorming, editing</td>
+                        <td>Content generation, paraphrasing, idea development</td>
+                        <td>Free / $20/mo</td>
+                        <td>Very Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grammarly</strong></td>
+                        <td>Grammar, tone, plagiarism checking</td>
+                        <td>Real-time editing, AI-powered suggestions</td>
+                        <td>Free / $12/mo</td>
+                        <td>Very Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zotero</strong></td>
+                        <td>Citation management, research organization</td>
+                        <td>Free, open-source, collaborative</td>
+                        <td>Free</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mendeley</strong></td>
+                        <td>Reference management, PDF annotation</td>
+                        <td>Cloud sync, AI-powered discovery</td>
+                        <td>Free / $5/mo</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scapple</strong></td>
+                        <td>Mind mapping, research visualization</td>
+                        <td>Visual research organization</td>
+                        <td>$15 one-time</td>
+                        <td>Low</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3>Tool Selection Guide</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Start Simple</h4>
+                        <p>Begin with ChatGPT or Claude for assessment and writing. They're free, versatile, and require no learning curve.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Add Specialized Tools</h4>
+                        <p>Once you're comfortable, add Grammarly (writing), Zotero (citations), and Turnitin (plagiarism check).</p>
+                    </div>
+                    <div class="card">
+                        <h4>Integrate Systems</h4>
+                        <p>Connect tools via APIs or use platforms like Google Workspace or Moodle that integrate multiple tools.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROMPT LIBRARY TAB -->
+        <div id="prompts" class="tab-content">
+            <div class="section">
+                <h2>💡 AI Prompt Library</h2>
+                <p>Ready-to-use prompts for assessment and research tasks. Copy and paste directly into ChatGPT, Claude, or Gemini.</p>
+            </div>
+
+            <div class="section">
+                <h3>Assessment Prompts</h3>
+
+                <h4>1. Generate Multiple Choice Questions</h4>
+                <div class="prompt-template">
+"Create 10 multiple-choice questions on [TOPIC] for [GRADE LEVEL] students. 
+Questions should range from basic (definitions) to intermediate (application).
+For each question provide:
+- Question stem
+- 4 answer options (A-D)
+- Correct answer
+- Brief explanation of why correct answer is right
+- Note on common misconception addressed (if applicable)
+
+Make questions aligned with [LEARNING STANDARD if applicable]."
+                </div>
+
+                <h4>2. Create Assessment Rubric</h4>
+                <div class="prompt-template">
+"Create a detailed 4-point rubric for assessing [ASSIGNMENT TYPE] on [TOPIC] for [GRADE LEVEL] students.
+
+Include these criteria:
+[LIST SPECIFIC CRITERIA]
+
+For each criterion, provide:
+- Excellent (4): Clear descriptor
+- Good (3): Clear descriptor  
+- Fair (2): Clear descriptor
+- Poor (1): Clear descriptor
+
+Make descriptors specific, observable, and measurable."
+                </div>
+
+                <h4>3. Design Performance Task</h4>
+                <div class="prompt-template">
+"Design a performance task for [GRADE LEVEL] students to demonstrate understanding of [LEARNING OBJECTIVE].
+
+The task should:
+- Be authentic and real-world relevant
+- Take approximately [TIME] to complete
+- Require [SPECIFY SKILLS/KNOWLEDGE]
+- Produce a tangible product or performance
+
+Include:
+- Clear instructions
+- Success criteria
+- Evaluation rubric
+- Extensions for advanced learners"
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Research & Writing Prompts</h3>
+
+                <h4>1. Develop Research Question</h4>
+                <div class="prompt-template">
+"Help me develop research questions for a paper on [TOPIC].
+
+Research context:
+- Target audience: [AUDIENCE]
+- Scope: [GEOGRAPHIC/TEMPORAL SCOPE]
+- Existing knowledge: [WHAT'S ALREADY KNOWN]
+- Research gap: [WHAT NEEDS TO BE STUDIED]
+
+Suggest 5 progressively complex research questions that would be suitable for a [PAPER TYPE] paper."
+                </div>
+
+                <h4>2. Analyze Literature</h4>
+                <div class="prompt-template">
+"Analyze the following research findings on [TOPIC]:
+[INSERT ABSTRACT OR KEY POINTS]
+
+Provide:
+1. Main argument/contribution
+2. Methodology (briefly)
+3. Key findings
+4. Limitations
+5. How this relates to [YOUR BROADER RESEARCH QUESTION]
+6. Potential gaps this research leaves open"
+                </div>
+
+                <h4>3. Improve Academic Writing</h4>
+                <div class="prompt-template">
+"Review this paragraph from my [PAPER SECTION] and suggest improvements:
+
+[INSERT PARAGRAPH]
+
+Please provide:
+1. Clarity: Is it easy to understand? Any jargon that needs explanation?
+2. Academic tone: Does it match formal academic writing?
+3. Sentence structure: Any run-ons or fragments?
+4. Evidence: Does it cite sources where needed?
+5. Conciseness: Any redundant phrases?
+
+Provide specific suggestions for improvement."
+                </div>
+
+                <h4>4. Generate Outline</h4>
+                <div class="prompt-template">
+"Create a detailed outline for a [PAPER TYPE] paper on [TOPIC].
+
+Paper scope:
+- Target length: [WORD COUNT]
+- Target audience: [AUDIENCE]
+- Main argument: [YOUR THESIS]
+- Key points to cover: [LIST MAIN POINTS]
+
+Provide a hierarchical outline with:
+- Main sections
+- Subsections with 2-3 bullet points for each
+- Suggested citations per section (approximate)"
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Pro Tips for Using Prompts</h3>
+                <ul class="feature-list">
+                    <li><strong>Be Specific:</strong> More detail in your prompt = better output</li>
+                    <li><strong>Iterate:</strong> First output isn't final. Ask for refinements</li>
+                    <li><strong>Customize:</strong> Adapt templates to your specific needs</li>
+                    <li><strong>Review Always:</strong> Fact-check and ensure accuracy before using with students</li>
+                    <li><strong>Combine Tools:</strong> Use ChatGPT for content, Grammarly for editing, Zotero for citations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="footer">
+            <p><strong>AI for Assessment & Research Toolkit</strong> | Interactive tool for educators | v1.0</p>
+            <p>Created with 🎓 for teaching excellence | © 2024</p>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
